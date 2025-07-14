@@ -17,10 +17,34 @@ const resourceCategories = [
     icon: "alert-circle-outline",
     resources: [
       {
+        id: "crisis-intervention",
+        title: "Crisis Intervention",
+        description: "Immediate help and emergency contacts",
+        type: "emergency",
+      },
+      {
+        id: "safety-plan",
+        title: "Personal Safety Plan",
+        description: "Create and manage your safety plan",
+        type: "emergency",
+      },
+      {
+        id: "coping-strategies",
+        title: "Emergency Coping Strategies",
+        description: "Quick techniques for crisis situations",
+        type: "emergency",
+      },
+      {
+        id: "emergency-contacts",
+        title: "Emergency Contacts",
+        description: "Comprehensive list of crisis support contacts",
+        type: "emergency",
+      },
+      {
         id: "1",
         title: "National Crisis Line",
         description: "24/7 support for mental health emergencies",
-        contact: "1-800-273-8255",
+        contact: "988",
         type: "phone",
       },
       {
@@ -150,6 +174,9 @@ export default function ResourcesScreen() {
     switch (resource.type) {
       case "phone":
         Linking.openURL(`tel:${resource.contact}`);
+        break;
+      case "emergency":
+        router.push(`/(main)/resources/emergency/${resource.id}` as any);
         break;
       case "article":
         router.push(`/resources/article/${resource.id}`);
