@@ -1,0 +1,304 @@
+version: "3.1"
+
+# intents:
+#   - greet
+#   - goodbye
+#   - anxiety_symptoms
+#   - depression_symptoms
+#   - sleep_issues
+#   - medical_question
+
+# responses:
+#   utter_greet:
+#     - text: "Hello! I'm your mental health assistant. How can I help you today?"
+#     - text: "Hi there! I'm here to support you with your mental health concerns. What's on your mind?"
+
+#   utter_goodbye:
+#     - text: "Goodbye. Remember, it's okay to reach out whenever you need support."
+#     - text: "Take care of yourself. I'm here if you need to talk again."
+
+#   utter_anxiety_support:
+#     - text: "Anxiety can be challenging to deal with. Deep breathing exercises can help in the moment. Try breathing in for 4 counts, hold for 4, and exhale for 6."
+#     - text: "I understand anxiety can feel overwhelming. Grounding techniques like the 5-4-3-2-1 method might help: name 5 things you can see, 4 things you can touch, 3 things you can hear, 2 things you can smell, and 1 thing you can taste."
+
+#   utter_depression_support:
+#     - text: "Depression is difficult, but you're not alone. Small steps like getting some sunlight or talking to someone you trust can help."
+#     - text: "I'm sorry you're feeling this way. Depression can make everything seem harder. Remember that seeking professional help is a sign of strength, not weakness."
+
+#   utter_sleep_advice:
+#     - text: "Sleep problems can affect your mental health. Try establishing a regular sleep schedule and avoiding screens an hour before bed."
+#     - text: "For better sleep, consider creating a calming bedtime routine and making your bedroom comfortable, dark, and quiet."
+
+#   utter_medical_disclaimer:
+#     - text: "I'm not a medical professional and can't provide medical advice. It's important to consult with a healthcare provider for medical concerns."
+#     - text: "For medical questions, it's best to speak with a qualified healthcare professional who can provide personalized advice based on your specific situation."
+
+#   utter_crisis_resources:
+#     - text: "If you're in crisis, please reach out to a Crisis helpline immediately at 988 (US) or go to your nearest emergency room. Your life matters."
+
+# session_config:
+#   session_expiration_time: 60
+#   carry_over_slots_to_new_session: true
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_sad
+  - mood_anxious
+  - mood_happy
+  - crisis_suicidal
+  - ask_resources
+  - ask_symptom_duration
+  - thank_you
+  - bot_challenge
+  - out_of_scope
+  - medical_question
+  # General Mood Check-In
+  - mood_checkin
+  - mood_rating
+  - mood_changes
+  - whats_on_mind
+  # Depression Screening
+  - depression_symptoms
+  - lost_interest
+  - energy_level
+  - concentration_issues
+  - sleep_changes
+  # Anxiety & Stress Assessment
+  - anxiety_symptoms
+  - overthinking
+  - racing_thoughts
+  - stress_triggers
+  - coping_methods
+  # Functionality & Daily Life
+  - daily_tasks
+  - eating_habits
+  - social_isolation
+  - motivation_issues
+  # Support Systems
+  - support_network
+  - reach_out_to
+  - social_contact
+  - support_groups
+  # Reflective & Coping
+  - what_helped
+  - gratitude
+  - self_care
+  - mindfulness_request
+  - positive_affirmation
+  # Symptom Tracking
+  - mood_logging
+  - mood_patterns
+  - mood_triggers
+  - mood_graph_request
+  # Resource & Guidance
+  - anxiety_tips
+  - negative_thoughts_help
+  - book_recommendation
+  - schedule_reminder
+
+entities:
+  - symptom
+  - duration
+
+slots:
+  symptom:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: symptom
+  duration:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: duration
+
+responses:
+  utter_medical_disclaimer:
+  - text: "I'm not a medical professional and can't provide medical advice. It's important to consult with a healthcare provider for medical concerns."
+  - text: "For medical questions, it's best to speak with a qualified healthcare professional who can provide personalized advice based on your specific situation."
+  utter_greet:
+    - text: "Hello! I'm here to support you. How are you feeling today?"
+  utter_goodbye:
+    - text: "Take care, and feel free to reach out anytime. Goodbye."
+  utter_affirm:
+    - text: "I'm glad you're open to talking. How can I help you further?"
+  utter_deny:
+    - text: "That's okay. I'm here whenever you're ready to talk."
+  utter_empathize_sad:
+    - text: "I'm really sorry you're feeling down. Would you like to share more, or maybe try some calming strategies together?"
+  utter_empathize_anxious:
+    - text: "It sounds really tough to feel anxious. I'm here for you. Would you like to talk about what's been going on?"
+  utter_celebrate_happy:
+    - text: "That's wonderful to hear! What's got you in such a great mood today?"
+  utter_crisis_response:
+    - text: "I'm so sorry you're feeling this way, and I'm here to help. Your life matters, and there are people who can support you right now. Would you like me to share some resources, like a hotline you can call?"
+  utter_provide_hotline:
+    - text: "Please consider reaching out to a professional. In the US, you can call the National Suicide Prevention Lifeline at 988 or text 'HOME' to the Crisis Text Line at 741741. If you're outside the US, I can help find a local resource. Would you like that?"
+  utter_suggest_coping:
+    - text: "Here are a few things that might help: deep breathing (inhale for 4, hold for 4, exhale for 4), journaling your thoughts, or taking a short walk. Would you like to try one of these, or is there something else that helps you?"
+  
+  # General Mood Check-In Responses
+  utter_mood_checkin:
+    - text: "I'd like to check in with you. How are you feeling today?"
+    - text: "Let's take a moment to check in. What's your mood like right now?"
+  utter_mood_rating_request:
+    - text: "On a scale of 1-10, how would you rate your mood right now? 1 being very low and 10 being excellent."
+  utter_mood_emotion_request:
+    - text: "What emotion best describes your current mood? For example, are you feeling sad, anxious, content, angry, or perhaps numb?"
+  utter_mood_changes_inquiry:
+    - text: "Have there been any major changes in how you're feeling recently?"
+  utter_whats_on_mind:
+    - text: "What's been on your mind lately? I'm here to listen."
+  
+  # Depression Screening Responses
+  utter_depression_screening:
+    - text: "Have you felt down, depressed, or hopeless in the past two weeks?"
+  utter_lost_interest_inquiry:
+    - text: "Have you lost interest or pleasure in activities you usually enjoy?"
+  utter_energy_level_check:
+    - text: "How is your energy level lately? Are you feeling more tired than usual?"
+  utter_concentration_check:
+    - text: "Are you finding it hard to concentrate or stay focused on things?"
+  utter_sleep_changes_inquiry:
+    - text: "Have you been sleeping more or less than usual lately?"
+  
+  # Crisis Response
+  utter_crisis_self_harm_check:
+    - text: "I'm concerned about you. Are you having thoughts of hurting yourself? Please know that I'm here to help and there are people who care about you."
+  utter_life_worth_check:
+    - text: "Do you feel like life is not worth living? Your feelings are valid, and there are people who want to support you through this."
+  utter_harm_plans_check:
+    - text: "Have you made any plans to harm yourself? If so, please reach out to a crisis hotline immediately at 988. Your safety is the most important thing right now."
+  utter_trusted_person_check:
+    - text: "Do you have someone you trust to talk to about how you're feeling? Having support is really important."
+  
+  # Anxiety & Stress Assessment
+  utter_anxiety_check:
+    - text: "Have you been feeling anxious or on edge lately?"
+  utter_overthinking_check:
+    - text: "Do you find yourself overthinking or worrying too much about things?"
+  utter_racing_thoughts_check:
+    - text: "Are you having trouble sleeping due to racing thoughts?"
+  utter_stress_triggers_inquiry:
+    - text: "What situations tend to trigger your stress or anxiety?"
+  utter_coping_methods_inquiry:
+    - text: "How do you usually cope when you're feeling overwhelmed?"
+  
+  # Functionality & Daily Life
+  utter_daily_tasks_check:
+    - text: "Have you been able to complete your daily tasks like school, work, or chores?"
+  utter_eating_habits_check:
+    - text: "Are you eating regularly? Sometimes when we're struggling, our eating patterns can change."
+  utter_isolation_check:
+    - text: "Have you been isolating yourself from others lately?"
+  utter_motivation_check:
+    - text: "How often do you feel motivated to get out of bed in the morning?"
+  
+  # Support Systems
+  utter_support_network_check:
+    - text: "Do you have someone you feel safe talking to about your feelings?"
+  utter_reach_out_inquiry:
+    - text: "Who do you usually reach out to when you're feeling low?"
+  utter_social_contact_check:
+    - text: "Have you spent time with anyone in the last week?"
+  utter_support_groups_offer:
+    - text: "Would you like suggestions for support groups or communities that might help?"
+  
+  # Reflective & Coping
+  utter_what_helped_inquiry:
+    - text: "What's something that helped you feel better recently?"
+  utter_gratitude_prompt:
+    - text: "Can you name one thing you're grateful for today, even if it's something small?"
+  utter_self_care_suggestion:
+    - text: "What small thing could you do right now to take care of yourself?"
+  utter_mindfulness_offer:
+    - text: "Would you like to try a mindfulness or breathing exercise together?"
+  utter_positive_affirmation_offer:
+    - text: "Is there a positive affirmation you'd like to hear today?"
+  utter_affirmation:
+    - text: "You are worthy of love and care. You are stronger than you know. This difficult time will pass."
+    - text: "You matter. Your feelings are valid. You have the strength to get through this."
+  
+  # Symptom Tracking
+  utter_mood_logging_offer:
+    - text: "Would you like to log your mood for today? This can help track patterns over time."
+  utter_mood_patterns_inquiry:
+    - text: "Have you noticed any patterns in your mood recently?"
+  utter_mood_triggers_inquiry:
+    - text: "Are there specific days or situations where you feel worse or better?"
+  utter_mood_graph_offer:
+    - text: "Do you want to see a mood graph for the past week?"
+  
+  # Resource & Guidance
+  utter_anxiety_tips:
+    - text: "Here are some tips for managing anxiety: Try the 5-4-3-2-1 grounding technique (5 things you see, 4 you touch, 3 you hear, 2 you smell, 1 you taste), practice deep breathing, or try progressive muscle relaxation."
+    - custom:
+        links:
+          - text: "Breathing Exercises"
+            route: "/resources"
+            category: "exercises"
+          - text: "Understanding Anxiety"
+            route: "/resources"
+            category: "education"
+  utter_negative_thoughts_help:
+    - text: "When dealing with negative thoughts, try to notice them without judgment, challenge their accuracy, and replace them with more balanced thoughts. Would you like to read a short article about this?"
+  utter_book_recommendation:
+    - text: "I'd recommend 'Feeling Good' by David Burns for depression, or 'The Anxiety and Worry Workbook' by David Clark for anxiety. Would you like more specific recommendations?"
+  utter_ask_symptom_duration:
+    - text: "Thanks for sharing. How long have you been feeling this way?"
+  utter_provide_resources:
+    - text: "There are some great resources available. You can find therapists through BetterHelp or Talkspace, or try apps like Calm for relaxation techniques. Would you like more specific suggestions?"
+    - custom:
+        links:
+          - text: "View All Resources"
+            route: "/resources"
+          - text: "Emergency Support"
+            route: "/resources"
+            category: "emergency"
+          - text: "Educational Content"
+            route: "/resources"
+            category: "education"
+  utter_thank_you:
+    - text: "You're very welcome. I'm here anytime you need me."
+  utter_iamabot:
+    - text: "I'm Maya, a supportive AI created by xAI. I'm here to listen and provide resources, but I'm not a therapist. How can I assist you today?"
+  utter_out_of_scope:
+    - text: "I'm not sure I can help with that, but I'm here for you. Want to talk about how you're feeling?"
+  utter_breathing_exercise:
+    - text: "Let's try this together: Breathe in slowly for 4 counts... hold for 4... and breathe out for 6. You're doing great."
+  utter_schedule_reminder_offer:
+    - text: "Would you like me to schedule a reminder to check in tomorrow? Regular check-ins can be really helpful."
+  utter_default_fallback:
+    - text: "I'm sorry, I didn't quite understand that. I'm here to support you with your mental health. How are you feeling today?"
+    - text: "I want to make sure I understand you correctly. Could you rephrase that? I'm here to help with your mental health concerns."
+  utter_therapy_info:
+    - text: "Therapy can be very helpful for mental health concerns. There are different types like CBT, DBT, and talk therapy. A mental health professional can help determine what's best for you."
+  utter_coping_strategies:
+    - text: "Here are some coping strategies: deep breathing, progressive muscle relaxation, journaling, going for a walk, listening to music, or talking to someone you trust. What sounds most helpful to you?"
+  utter_sleep_hygiene:
+    - text: "Good sleep hygiene includes: keeping a regular sleep schedule, avoiding screens before bed, creating a comfortable sleep environment, and avoiding caffeine late in the day. Would you like more specific tips?"
+  utter_stress_management:
+    - text: "For stress management, try: identifying your triggers, practicing relaxation techniques, exercising regularly, maintaining social connections, and setting realistic goals. What area would you like to focus on?"
+  utter_encourage_professional_help:
+    - text: "It sounds like you're going through a difficult time. While I'm here to support you, a mental health professional can provide personalized care. Have you considered speaking with a therapist or counselor?"
+  utter_validate_feelings:
+    - text: "Your feelings are completely valid and understandable. It takes courage to reach out and talk about what you're experiencing. I'm here to support you."
+  utter_progress_acknowledgment:
+    - text: "I can hear that you're working hard on your mental health. Progress isn't always linear, and every small step counts. What's one thing you're proud of recently?"
+  utter_setback_support:
+    - text: "Setbacks are a normal part of the healing process. They don't erase the progress you've made. What has helped you get through difficult times before?"
+
+actions:
+  - action_provide_resource_links
+  - action_provide_anxiety_resources
+  - action_provide_crisis_resources
+  - action_provide_wellness_resources
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

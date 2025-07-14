@@ -1,0 +1,162 @@
+[
+  {
+    "text": "Do I need medication?",
+    "intent": "medical_question",
+    "intent_prediction": {
+      "name": "medication_questions",
+      "confidence": 0.7382899522781372
+    }
+  },
+  {
+    "text": "Do I need professional help?",
+    "intent": "medical_question",
+    "intent_prediction": {
+      "name": "ask_about_therapy",
+      "confidence": 0.5304908752441406
+    }
+  },
+  {
+    "text": "I want to hurt myself",
+    "intent": "crisis_suicidal",
+    "intent_prediction": {
+      "name": "setback_concern",
+      "confidence": 0.4808814823627472
+    }
+  },
+  {
+    "text": "Life isn't worth living",
+    "intent": "crisis_suicidal",
+    "intent_prediction": {
+      "name": "setback_concern",
+      "confidence": 0.476538747549057
+    }
+  },
+  {
+    "text": "I'm planning to kill myself",
+    "intent": "crisis_suicidal",
+    "intent_prediction": {
+      "name": "setback_concern",
+      "confidence": 0.654936671257019
+    }
+  },
+  {
+    "text": "I'm eating too much",
+    "intent": "depression_symptoms",
+    "intent_prediction": {
+      "name": "eating_habits",
+      "confidence": 0.5508967041969299
+    }
+  },
+  {
+    "text": "I'm feeling overwhelmed",
+    "intent": "express_feelings",
+    "intent_prediction": {
+      "name": "mood_anxious",
+      "confidence": 0.5155830383300781
+    }
+  },
+  {
+    "text": "I'm worried",
+    "intent": "express_feelings",
+    "intent_prediction": {
+      "name": "mood_anxious",
+      "confidence": 0.5383629202842712
+    }
+  },
+  {
+    "text": "I feel hopeless",
+    "intent": "express_feelings",
+    "intent_prediction": {
+      "name": "depression_symptoms",
+      "confidence": 0.5204161405563354
+    }
+  },
+  {
+    "text": "I have no energy",
+    "intent": "energy_level",
+    "intent_prediction": {
+      "name": "depression_symptoms",
+      "confidence": 0.5893808603286743
+    }
+  },
+  {
+    "text": "I'm always tired",
+    "intent": "energy_level",
+    "intent_prediction": {
+      "name": "depression_symptoms",
+      "confidence": 0.4809587299823761
+    }
+  },
+  {
+    "text": "I'm sleeping too much",
+    "intent": "sleep_changes",
+    "intent_prediction": {
+      "name": "depression_symptoms",
+      "confidence": 0.6214426755905151
+    }
+  },
+  {
+    "text": "I have insomnia",
+    "intent": "sleep_changes",
+    "intent_prediction": {
+      "name": "sleep_issues",
+      "confidence": 0.5045248866081238
+    }
+  },
+  {
+    "text": "I can't fall asleep",
+    "intent": "sleep_changes",
+    "intent_prediction": {
+      "name": "sleep_issues",
+      "confidence": 0.48968398571014404
+    }
+  },
+  {
+    "text": "I feel anxious",
+    "intent": "anxiety_symptoms",
+    "intent_prediction": {
+      "name": "mood_anxious",
+      "confidence": 0.39075541496276855
+    }
+  },
+  {
+    "text": "I've lost my appetite",
+    "intent": "eating_habits",
+    "intent_prediction": {
+      "name": "depression_symptoms",
+      "confidence": 0.48557162284851074
+    }
+  },
+  {
+    "text": "I need someone to talk to",
+    "intent": "support_network",
+    "intent_prediction": {
+      "name": "ask_for_help",
+      "confidence": 0.6108194589614868
+    }
+  },
+  {
+    "text": "I need support",
+    "intent": "support_network",
+    "intent_prediction": {
+      "name": "ask_for_help",
+      "confidence": 0.4969284236431122
+    }
+  },
+  {
+    "text": "I don't know who to talk to",
+    "intent": "reach_out_to",
+    "intent_prediction": {
+      "name": "mood_checkin",
+      "confidence": 0.3456798791885376
+    }
+  },
+  {
+    "text": "What helps with anxiety",
+    "intent": "anxiety_tips",
+    "intent_prediction": {
+      "name": "coping_methods",
+      "confidence": 0.5413736701011658
+    }
+  }
+]

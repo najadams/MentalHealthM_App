@@ -1,0 +1,104 @@
+version: "3.1"
+
+rules:
+  - rule: Say goodbye anytime the user says goodbye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - rule: Respond to bot challenge
+    steps:
+      - intent: bot_challenge
+      - action: utter_iamabot
+
+  - rule: Always provide medical disclaimer for medical questions
+    steps:
+      - intent: medical_question
+      - action: utter_medical_disclaimer
+
+  - rule: Handle medication questions with disclaimer
+    steps:
+      - intent: medication_questions
+      - action: utter_medical_disclaimer
+
+  - rule: Crisis help with immediate resources
+    steps:
+      - intent: crisis_help
+      - action: utter_crisis_response
+      - action: action_provide_crisis_resources
+
+  - rule: Provide anxiety resources with links when requested
+    steps:
+      - intent: anxiety_tips
+      - action: action_provide_anxiety_resources
+
+  - rule: Offer mindfulness when requested
+    steps:
+      - intent: mindfulness_request
+      - action: utter_mindfulness_offer
+
+  - rule: Provide positive affirmations when requested
+    steps:
+      - intent: positive_affirmation
+      - action: utter_positive_affirmation_offer
+
+  - rule: Provide book recommendations when requested
+    steps:
+      - intent: book_recommendation
+      - action: utter_book_recommendation
+
+  - rule: Offer mood logging when tracking requested
+    steps:
+      - intent: mood_logging
+      - action: utter_mood_logging_offer
+
+  - rule: Offer schedule reminder when requested
+    steps:
+      - intent: schedule_reminder
+      - action: utter_schedule_reminder_offer
+
+  - rule: Handle out of scope with redirection
+    steps:
+      - intent: out_of_scope
+      - action: utter_out_of_scope
+
+  - rule: Thank you response
+    steps:
+      - intent: thank_you
+      - action: utter_thank_you
+
+  - rule: Provide resources with links when asked
+    steps:
+      - intent: ask_resources
+      - action: action_provide_resource_links
+
+  - rule: Handle therapy questions with resources
+    steps:
+      - intent: ask_about_therapy
+      - action: action_provide_resource_links
+
+  - rule: Respond to coping method requests
+    steps:
+      - intent: coping_methods
+      - action: utter_suggest_coping
+
+  - rule: Handle sleep issues
+    steps:
+      - intent: sleep_issues
+      - action: utter_sleep_changes_inquiry
+
+  - rule: Respond to stress triggers
+    steps:
+      - intent: stress_triggers
+      - action: utter_stress_triggers_inquiry
+
+  - rule: Provide wellness resources for self-care
+    steps:
+      - intent: self_care
+      - action: action_provide_wellness_resources
+
+  - rule: Crisis suicidal immediate response with resources
+    steps:
+      - intent: crisis_suicidal
+      - action: utter_crisis_response
+      - action: action_provide_crisis_resources

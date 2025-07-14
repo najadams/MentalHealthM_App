@@ -1,0 +1,649 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - hey there
+
+- intent: goodbye
+  examples: |
+    - bye
+    - goodbye
+    - see you around
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+
+- intent: mood_happy
+  examples: |
+    - I am feeling good
+    - I am great
+    - I'm good
+    - I'm feeling happy
+    - I feel wonderful
+
+- intent: mood_sad
+  examples: |
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - I'm unhappy
+    - I'm having a bad day
+
+- intent: mood_anxious
+  examples: |
+    - I feel anxious
+    - I'm worried
+    - I can't stop thinking about my problems
+    - I'm feeling overwhelmed
+    - I have anxiety
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+- intent: thank_you
+  examples: |
+    - thanks
+    - thank you
+    - thanks a lot
+    - I appreciate it
+
+- intent: ask_resources
+  examples: |
+    - What resources do you have?
+    - Can you recommend some resources?
+    - Where can I find help?
+    - I need resources
+
+- intent: ask_symptom_duration
+  examples: |
+    - How long will I feel this way?
+    - When will my symptoms go away?
+    - Is this temporary?
+    - Will I always feel like this?
+
+- intent: medical_question
+  examples: |
+    - Do I need medication?
+    - Should I see a doctor?
+    - Is this a medical issue?
+    - Do I need professional help?
+
+- intent: crisis_suicidal
+  examples: |
+    - I want to end it all
+    - I don't want to live anymore
+    - I'm thinking about suicide
+    - I want to hurt myself
+    - Life isn't worth living
+    - I have thoughts of self-harm
+    - I'm planning to kill myself
+    - I can't take it anymore
+    - I want to die
+    - Everything would be better if I was gone
+
+- intent: depression_symptoms
+  examples: |
+    - I feel hopeless
+    - I have no energy
+    - I can't get out of bed
+    - Nothing interests me anymore
+    - I feel empty inside
+    - I'm always tired
+    - I can't concentrate
+    - I feel worthless
+    - I'm sleeping too much
+    - I'm not sleeping well
+    - I've lost my appetite
+    - I'm eating too much
+    - I feel guilty all the time
+    - I can't make decisions
+    - I feel numb
+
+- intent: anxiety_symptoms
+  examples: |
+    - My heart is racing
+    - I can't stop worrying
+    - I'm having panic attacks
+    - I feel like I can't breathe
+    - I'm constantly on edge
+    - I have racing thoughts
+    - I'm sweating and shaking
+    - I feel dizzy
+    - I'm afraid something bad will happen
+    - I can't relax
+    - I'm avoiding social situations
+    - I'm overthinking everything
+    - I feel restless
+    - I'm having trouble sleeping due to worry
+
+- intent: sleep_issues
+  examples: |
+    - I can't fall asleep
+    - I wake up multiple times at night
+    - I'm having nightmares
+    - I sleep too much
+    - I wake up too early
+    - I don't feel rested
+    - My sleep schedule is messed up
+    - I'm tired all day
+    - I have insomnia
+    - I'm sleeping during the day
+
+- intent: stress_triggers
+  examples: |
+    - Work is stressing me out
+    - School is overwhelming
+    - My relationships are causing stress
+    - Money problems are worrying me
+    - Family issues are getting to me
+    - I'm stressed about my health
+    - Social situations make me anxious
+    - I'm worried about the future
+    - Change makes me nervous
+    - I feel pressure to succeed
+
+- intent: coping_methods
+  examples: |
+    - How can I cope with this?
+    - What helps with anxiety?
+    - I need coping strategies
+    - How do I manage stress?
+    - What can I do when I'm overwhelmed?
+    - I need help dealing with this
+    - How do I calm down?
+    - What are some relaxation techniques?
+    - I want to learn mindfulness
+    - How do I practice self-care?
+
+- intent: ask_for_help
+  examples: |
+    - I need help
+    - Can you help me?
+    - I don't know what to do
+    - I'm struggling
+    - I need support
+    - Can you give me advice?
+    - I'm lost
+    - I need guidance
+    - I'm having a hard time
+    - I need someone to talk to
+
+- intent: follow_up_question
+  examples: |
+    - Can you tell me more about that?
+    - What else can I do?
+    - How does that work?
+    - Can you explain that better?
+    - What do you mean?
+    - Is there anything else?
+    - Can you give me more details?
+    - What are my options?
+    - How long will this take?
+    - Will this really help?
+
+- intent: express_feelings
+  examples: |
+    - I'm feeling overwhelmed
+    - I'm scared
+    - I'm confused
+    - I'm angry
+    - I'm frustrated
+    - I'm lonely
+    - I'm disappointed
+    - I'm stressed
+    - I'm worried
+    - I'm exhausted
+    - I feel lost
+    - I feel stuck
+    - I feel hopeless
+    - I feel better
+    - I'm grateful
+
+- intent: ask_about_therapy
+  examples: |
+    - Should I see a therapist?
+    - How do I find a therapist?
+    - What is therapy like?
+    - Do I need professional help?
+    - Is counseling right for me?
+    - How much does therapy cost?
+    - What types of therapy are there?
+    - How do I know if I need therapy?
+    - Can therapy really help?
+    - What should I expect in therapy?
+
+- intent: medication_questions
+  examples: |
+    - Do I need medication?
+    - What are the side effects?
+    - How do antidepressants work?
+    - Should I talk to my doctor about medication?
+    - Are there natural alternatives?
+    - How long does medication take to work?
+    - Can I stop taking medication?
+    - What if medication doesn't work?
+    - Are there different types of medication?
+    - Will I be dependent on medication?
+
+- intent: crisis_help
+  examples: |
+    - I'm in crisis
+    - I need immediate help
+    - This is an emergency
+    - I'm having a mental health crisis
+    - I need crisis support
+    - I'm in danger
+    - I need someone right now
+    - This can't wait
+    - I'm having a breakdown
+    - I need urgent help
+
+- intent: positive_progress
+  examples: |
+    - I'm feeling better
+    - That helped
+    - I'm making progress
+    - Things are improving
+    - I had a good day
+    - I'm proud of myself
+    - I accomplished something
+    - I feel hopeful
+    - I'm getting stronger
+    - I'm learning to cope
+
+- intent: setback_concern
+  examples: |
+    - I'm having a setback
+    - I thought I was better but I'm not
+    - I'm struggling again
+    - I feel like I'm going backwards
+    - Why am I not getting better?
+    - I'm disappointed in myself
+    - I feel like I failed
+    - This is harder than I thought
+    - I'm losing hope again
+    - I don't think I'm improving
+    - I want to hurt myself
+    - I have thoughts of suicide
+    - I don't see the point in living
+    - I wish I was dead
+    - I'm planning to kill myself
+    - Life isn't worth living
+    - I want to disappear forever
+
+# General Mood Check-In Intents
+- intent: mood_checkin
+  examples: |
+    - How am I feeling today
+    - I want to check in
+    - Let's talk about my mood
+    - Can we do a mood check
+    - I'd like to share how I'm feeling
+    - Check in with me
+    - Mood check please
+
+- intent: mood_rating
+  examples: |
+    - Rate my mood
+    - On a scale of 1 to 10
+    - How would I rate my mood
+    - My mood is about a 3
+    - I'd say my mood is 7 out of 10
+    - Scale my feelings
+    - Number my mood
+
+- intent: mood_changes
+  examples: |
+    - My mood has changed recently
+    - I've been feeling different lately
+    - Things have changed for me
+    - My feelings are different now
+    - I notice changes in how I feel
+    - Something has shifted in my mood
+    - I'm not feeling like myself
+
+- intent: whats_on_mind
+  examples: |
+    - What's on my mind
+    - I've been thinking about things
+    - There's a lot going through my head
+    - I have thoughts I want to share
+    - Something's been bothering me
+    - I can't stop thinking about something
+    - My mind is racing
+
+# Depression Screening Intents
+- intent: depression_symptoms
+  examples: |
+    - I feel depressed
+    - I've been feeling down
+    - I feel hopeless
+    - Everything seems pointless
+    - I'm in a dark place
+    - I feel empty inside
+    - Nothing brings me joy anymore
+    - I feel worthless
+    - I'm struggling with depression
+    - I feel like I'm in a hole
+
+- intent: lost_interest
+  examples: |
+    - I don't enjoy things anymore
+    - I've lost interest in everything
+    - Nothing seems fun
+    - I don't care about my hobbies
+    - Activities I used to love feel boring
+    - I can't find pleasure in anything
+    - Everything feels meaningless
+    - I don't want to do anything
+
+- intent: energy_level
+  examples: |
+    - I have no energy
+    - I'm always tired
+    - I feel drained
+    - I'm exhausted all the time
+    - I can barely get out of bed
+    - My energy is so low
+    - I feel weak and tired
+    - I'm running on empty
+
+- intent: concentration_issues
+  examples: |
+    - I can't focus
+    - I have trouble concentrating
+    - My mind wanders constantly
+    - I can't stay focused
+    - I'm easily distracted
+    - I can't think clearly
+    - My concentration is poor
+    - I struggle to pay attention
+
+- intent: sleep_changes
+  examples: |
+    - I can't sleep
+    - I'm sleeping too much
+    - My sleep is all messed up
+    - I wake up multiple times
+    - I sleep all day
+    - I have insomnia
+    - I can't fall asleep
+    - I sleep but don't feel rested
+
+# Anxiety & Stress Assessment Intents
+- intent: anxiety_symptoms
+  examples: |
+    - I feel anxious
+    - I'm on edge
+    - I feel nervous all the time
+    - I have panic attacks
+    - I feel restless
+    - I'm constantly worried
+    - I feel tense
+    - My heart races
+
+- intent: overthinking
+  examples: |
+    - I overthink everything
+    - I worry too much
+    - I can't stop analyzing
+    - My thoughts spiral
+    - I think about things over and over
+    - I worry about everything
+    - I ruminate constantly
+    - I can't turn my brain off
+
+- intent: racing_thoughts
+  examples: |
+    - My thoughts are racing
+    - I can't sleep because of my thoughts
+    - My mind won't quiet down
+    - Thoughts keep me awake
+    - I have racing thoughts at night
+    - My brain won't shut off
+    - Too many thoughts at once
+
+- intent: stress_triggers
+  examples: |
+    - What triggers my stress
+    - Certain situations make me anxious
+    - I get stressed by specific things
+    - Some situations overwhelm me
+    - I know what makes me anxious
+    - Particular events stress me out
+    - I have anxiety triggers
+
+- intent: coping_methods
+  examples: |
+    - How do I cope
+    - What helps when I'm overwhelmed
+    - My coping strategies
+    - How I deal with stress
+    - What I do when anxious
+    - My ways of handling things
+    - How I manage difficult feelings
+
+# Functionality & Daily Life Intents
+- intent: daily_tasks
+  examples: |
+    - I can't do my daily tasks
+    - I struggle with basic activities
+    - I can't complete my work
+    - Daily life is hard
+    - I can't manage my responsibilities
+    - Simple tasks feel impossible
+    - I'm falling behind on everything
+
+- intent: eating_habits
+  examples: |
+    - I'm not eating well
+    - I've lost my appetite
+    - I'm eating too much
+    - I forget to eat
+    - My eating is irregular
+    - I don't feel like eating
+    - Food doesn't appeal to me
+
+- intent: social_isolation
+  examples: |
+    - I'm isolating myself
+    - I don't want to see anyone
+    - I avoid people
+    - I stay away from others
+    - I don't socialize anymore
+    - I withdraw from everyone
+    - I prefer to be alone
+
+- intent: motivation_issues
+  examples: |
+    - I have no motivation
+    - I don't want to get out of bed
+    - I can't motivate myself
+    - I feel unmotivated
+    - I don't feel like doing anything
+    - Getting up is hard
+    - I lack drive
+
+# Support Systems Intents
+- intent: support_network
+  examples: |
+    - Do I have support
+    - Who can I talk to
+    - I need someone to talk to
+    - I don't have anyone
+    - I feel alone
+    - I need support
+    - Who's there for me
+
+- intent: reach_out_to
+  examples: |
+    - Who do I call when I'm down
+    - Who can I reach out to
+    - I don't know who to talk to
+    - Who should I contact
+    - I need someone to call
+    - Who's available to help
+
+- intent: social_contact
+  examples: |
+    - I haven't seen anyone lately
+    - I've been alone all week
+    - I don't spend time with people
+    - I haven't socialized recently
+    - I'm always by myself
+    - I don't see friends anymore
+
+- intent: support_groups
+  examples: |
+    - Are there support groups
+    - I want to find a support group
+    - Do you know any communities
+    - I need group support
+    - Where can I find help groups
+    - I want to connect with others
+
+# Reflective & Coping Intents
+- intent: what_helped
+  examples: |
+    - What helped me feel better
+    - Something that made me feel good
+    - What worked for me recently
+    - Something positive that happened
+    - What lifted my mood
+    - A good moment I had
+
+- intent: gratitude
+  examples: |
+    - What am I grateful for
+    - Something I'm thankful for
+    - What's good in my life
+    - I want to practice gratitude
+    - Something positive to focus on
+    - What I appreciate
+
+- intent: self_care
+  examples: |
+    - How can I take care of myself
+    - What self-care can I do
+    - I need to care for myself
+    - How to be kind to myself
+    - What would help me right now
+    - I want to do something nice for myself
+
+- intent: mindfulness_request
+  examples: |
+    - I want to try mindfulness
+    - Can we do a breathing exercise
+    - I need to calm down
+    - Help me relax
+    - I want to meditate
+    - Can you guide me through breathing
+
+- intent: positive_affirmation
+  examples: |
+    - I need positive affirmations
+    - Tell me something encouraging
+    - I need to hear something good
+    - Give me a positive message
+    - I want encouragement
+    - Say something uplifting
+
+# Symptom Tracking Intents
+- intent: mood_logging
+  examples: |
+    - I want to log my mood
+    - Can I track my feelings
+    - I want to record how I feel
+    - Help me track my mood
+    - I want to log today's mood
+    - Can I save my mood data
+
+- intent: mood_patterns
+  examples: |
+    - Do I have mood patterns
+    - I notice patterns in my feelings
+    - My mood changes in patterns
+    - I see trends in how I feel
+    - There are patterns to my emotions
+    - I want to understand my mood cycles
+
+- intent: mood_triggers
+  examples: |
+    - What triggers my bad moods
+    - When do I feel worse
+    - What makes me feel better or worse
+    - I want to identify my triggers
+    - What affects my mood
+    - When am I most vulnerable
+
+- intent: mood_graph_request
+  examples: |
+    - Show me my mood graph
+    - I want to see my mood chart
+    - Can I see my mood over time
+    - Display my mood data
+    - Show me my mood trends
+    - I want to see my progress
+
+# Resource & Guidance Intents
+- intent: anxiety_tips
+  examples: |
+    - I need anxiety tips
+    - How to manage anxiety
+    - Help with anxiety
+    - Anxiety coping strategies
+    - What helps with anxiety
+    - I want anxiety advice
+
+- intent: negative_thoughts_help
+  examples: |
+    - Help with negative thoughts
+    - I have negative thinking
+    - How to stop negative thoughts
+    - I need help with my thoughts
+    - My thoughts are very negative
+    - I want to change my thinking
+
+- intent: book_recommendation
+  examples: |
+    - Recommend a book
+    - I want book suggestions
+    - What books can help
+    - Suggest reading material
+    - I need a good book
+    - What should I read
+
+- intent: schedule_reminder
+  examples: |
+    - Set a reminder to check in
+    - I want a daily check-in
+    - Remind me to talk tomorrow
+    - Schedule a mood check
+    - I want regular reminders
+    - Set up check-in times
+    - I have suicidal thoughts

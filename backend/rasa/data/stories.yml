@@ -1,0 +1,381 @@
+version: "3.1"
+
+# stories:
+#   - story: anxiety path
+#     steps:
+#       - intent: greet
+#       - action: utter_greet
+#       - intent: anxiety_symptoms
+#       - action: utter_anxiety_support
+#       - intent: goodbye
+#       - action: utter_goodbye
+
+#   - story: depression path
+#     steps:
+#       - intent: greet
+#       - action: utter_greet
+#       - intent: depression_symptoms
+#       - action: utter_depression_support
+#       - intent: goodbye
+#       - action: utter_goodbye
+
+#   - story: sleep issues path
+#     steps:
+#       - intent: greet
+#       - action: utter_greet
+#       - intent: sleep_issues
+#       - action: utter_sleep_advice
+#       - intent: goodbye
+#       - action: utter_goodbye
+
+#   - story: medical question path
+#     steps:
+#       - intent: medical_question
+#       - action: utter_medical_disclaimer
+
+stories:
+- story: User greets and feels sad
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_sad
+  - action: utter_empathize_sad
+  - action: utter_suggest_coping
+  - intent: affirm
+  - action: utter_affirm
+
+- story: User feels sad but declines help
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_sad
+  - action: utter_empathize_sad
+  - action: utter_suggest_coping
+  - intent: deny
+  - action: utter_deny
+
+- story: Depression symptoms conversation
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: depression_symptoms
+  - action: utter_empathize_sad
+  - action: utter_depression_screening
+  - intent: affirm
+  - action: utter_suggest_coping
+  - action: utter_provide_resources
+
+- story: Anxiety symptoms with follow-up
+  steps:
+  - intent: anxiety_symptoms
+  - action: utter_empathize_anxious
+  - action: utter_anxiety_tips
+  - intent: follow_up_question
+  - action: utter_mindfulness_offer
+  - intent: affirm
+  - action: utter_breathing_exercise
+
+- story: Crisis intervention
+  steps:
+  - intent: crisis_suicidal
+  - action: utter_crisis_response
+  - action: action_provide_crisis_resources
+  - intent: affirm
+  - action: utter_trusted_person_check
+
+- story: Asking for therapy information
+  steps:
+  - intent: ask_about_therapy
+  - action: action_provide_resource_links
+  - intent: follow_up_question
+  - action: utter_medical_disclaimer
+
+- story: Medication questions
+  steps:
+  - intent: medication_questions
+  - action: utter_medical_disclaimer
+  - intent: follow_up_question
+  - action: utter_provide_resources
+
+- story: Coping strategies request
+  steps:
+  - intent: coping_methods
+  - action: utter_suggest_coping
+  - intent: follow_up_question
+  - action: utter_anxiety_tips
+  - intent: affirm
+  - action: utter_mindfulness_offer
+
+- story: Sleep issues conversation
+  steps:
+  - intent: sleep_issues
+  - action: utter_sleep_changes_inquiry
+  - intent: affirm
+  - action: utter_suggest_coping
+  - action: utter_self_care_suggestion
+
+- story: Positive progress acknowledgment
+  steps:
+  - intent: positive_progress
+  - action: utter_celebrate_happy
+  - action: utter_gratitude_prompt
+  - intent: affirm
+  - action: utter_affirm
+
+- story: Handling setbacks
+  steps:
+  - intent: setback_concern
+  - action: utter_empathize_sad
+  - action: utter_what_helped_inquiry
+  - intent: express_feelings
+  - action: utter_suggest_coping
+
+- story: Stress triggers discussion
+  steps:
+  - intent: stress_triggers
+  - action: utter_stress_triggers_inquiry
+  - intent: express_feelings
+  - action: utter_coping_methods_inquiry
+  - action: utter_suggest_coping
+
+- story: General help request
+  steps:
+  - intent: ask_for_help
+  - action: utter_greet
+  - action: utter_mood_checkin
+  - intent: express_feelings
+  - action: utter_empathize_sad
+  - action: utter_suggest_coping
+
+- story: Happy mood celebration
+  steps:
+  - intent: mood_happy
+  - action: utter_celebrate_happy
+  - action: utter_gratitude_prompt
+  - intent: thank_you
+  - action: utter_thank_you
+
+- story: Anxious mood with resources
+  steps:
+  - intent: mood_anxious
+  - action: utter_empathize_anxious
+  - action: action_provide_anxiety_resources
+  - intent: ask_resources
+  - action: action_provide_resource_links
+  - intent: mood_sad
+  - action: utter_empathize_sad
+  - intent: deny
+  - action: utter_deny
+
+- story: Mood check-in flow
+  steps:
+  - intent: mood_checkin
+  - action: utter_mood_checkin
+  - intent: mood_rating
+  - action: utter_mood_rating_request
+  - intent: mood_changes
+  - action: utter_mood_changes_inquiry
+
+- story: Depression screening flow
+  steps:
+  - intent: depression_symptoms
+  - action: utter_depression_screening
+  - intent: affirm
+  - action: utter_lost_interest_inquiry
+  - intent: lost_interest
+  - action: utter_energy_level_check
+  - intent: energy_level
+  - action: utter_concentration_check
+
+- story: Anxiety assessment flow
+  steps:
+  - intent: anxiety_symptoms
+  - action: utter_anxiety_check
+  - intent: affirm
+  - action: utter_overthinking_check
+  - intent: overthinking
+  - action: utter_racing_thoughts_check
+  - intent: racing_thoughts
+  - action: utter_stress_triggers_inquiry
+
+- story: Crisis intervention flow
+  steps:
+  - intent: crisis_suicidal
+  - action: utter_crisis_response
+  - action: action_provide_crisis_resources
+  - intent: affirm
+  - action: utter_trusted_person_check
+
+- story: Daily functioning assessment
+  steps:
+  - intent: daily_tasks
+  - action: utter_daily_tasks_check
+  - intent: deny
+  - action: utter_eating_habits_check
+  - intent: eating_habits
+  - action: utter_isolation_check
+  - intent: social_isolation
+  - action: utter_motivation_check
+
+- story: Support system inquiry
+  steps:
+  - intent: support_network
+  - action: utter_support_network_check
+  - intent: deny
+  - action: utter_support_groups_offer
+  - intent: affirm
+  - action: utter_reach_out_inquiry
+
+- story: Coping and self-care flow
+  steps:
+  - intent: self_care
+  - action: action_provide_wellness_resources
+  - intent: mindfulness_request
+  - action: utter_mindfulness_offer
+  - intent: affirm
+  - action: utter_breathing_exercise
+
+- story: Positive reinforcement flow
+  steps:
+  - intent: gratitude
+  - action: utter_gratitude_prompt
+  - intent: what_helped
+  - action: utter_what_helped_inquiry
+  - intent: positive_affirmation
+  - action: utter_positive_affirmation_offer
+  - intent: affirm
+  - action: utter_affirmation
+
+- story: Mood tracking flow
+  steps:
+  - intent: mood_logging
+  - action: utter_mood_logging_offer
+  - intent: affirm
+  - action: utter_mood_patterns_inquiry
+  - intent: mood_patterns
+  - action: utter_mood_triggers_inquiry
+  - intent: mood_graph_request
+  - action: utter_mood_graph_offer
+
+- story: Resource request flow
+  steps:
+  - intent: anxiety_tips
+  - action: action_provide_anxiety_resources
+  - intent: negative_thoughts_help
+  - action: utter_negative_thoughts_help
+  - intent: book_recommendation
+  - action: utter_book_recommendation
+  - intent: schedule_reminder
+  - action: utter_schedule_reminder_offer
+
+- story: Sleep issues flow
+  steps:
+  - intent: sleep_changes
+  - action: utter_sleep_changes_inquiry
+  - intent: racing_thoughts
+  - action: utter_racing_thoughts_check
+  - intent: affirm
+  - action: utter_mindfulness_offer
+  - intent: affirm
+  - action: utter_breathing_exercise
+
+- story: Energy and motivation flow
+  steps:
+  - intent: energy_level
+  - action: utter_energy_level_check
+  - intent: motivation_issues
+  - action: utter_motivation_check
+  - intent: self_care
+  - action: action_provide_wellness_resources
+
+- story: Comprehensive mental health check
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_checkin
+  - action: utter_mood_checkin
+  - intent: mood_sad
+  - action: utter_depression_screening
+  - intent: affirm
+  - action: utter_energy_level_check
+  - intent: energy_level
+  - action: utter_support_network_check
+  - intent: support_network
+  - action: utter_self_care_suggestion
+  - action: utter_empathize_sad
+  - action: utter_suggest_coping
+  - intent: deny
+  - action: utter_deny
+- story: User reports anxiety and duration
+  steps:
+  - intent: mood_anxious
+  - action: utter_empathize_anxious
+  - action: utter_ask_symptom_duration
+  - intent: ask_symptom_duration
+  - action: action_provide_resource_links
+- story: User is happy
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_happy
+  - action: utter_celebrate_happy
+- story: User asks for resources
+  steps:
+  - intent: ask_resources
+  - action: action_provide_resource_links
+  - intent: thank_you
+  - action: utter_thank_you
+- story: User goes off-topic
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: out_of_scope
+  - action: utter_out_of_scope
+- story: User reports anxiety but goes off-topic
+  steps:
+  - intent: mood_anxious
+  - action: utter_empathize_anxious
+  - action: utter_ask_symptom_duration
+  - intent: out_of_scope
+  - action: utter_out_of_scope
+
+- story: User requests general resources with links
+  steps:
+  - intent: ask_resources
+  - action: action_provide_resource_links
+  - intent: thank_you
+  - action: utter_thank_you
+
+- story: User needs anxiety resources with links
+  steps:
+  - intent: anxiety_symptoms
+  - action: utter_empathize_anxious
+  - action: action_provide_anxiety_resources
+  - intent: affirm
+  - action: utter_suggest_coping
+
+- story: User in crisis needs immediate resources
+  steps:
+  - intent: crisis_suicidal
+  - action: utter_crisis_response
+  - action: action_provide_crisis_resources
+  - intent: affirm
+  - action: utter_trusted_person_check
+
+- story: User asks for wellness and self-care resources
+  steps:
+  - intent: self_care
+  - action: action_provide_wellness_resources
+  - intent: mindfulness_request
+  - action: utter_mindfulness_offer
+
+- story: Comprehensive resource flow
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_resources
+  - action: action_provide_resource_links
+  - intent: anxiety_symptoms
+  - action: action_provide_anxiety_resources
+  - intent: thank_you
+  - action: utter_thank_you
