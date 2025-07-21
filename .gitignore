@@ -85,6 +85,7 @@ ehthumbs.db
 # Temporary files
 *.tmp
 *.temp
+.vercel
 
 app/(main)/resources/audio/1*
 app/(main)/resources/video/
