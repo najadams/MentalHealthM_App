@@ -5,11 +5,12 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
-  Dimensions,
   Alert,
+  Dimensions,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter, useLocalSearchParams } from "expo-router";
+import { Video, ResizeMode } from "expo-av";
 
 const { width } = Dimensions.get("window");
 
@@ -35,8 +36,8 @@ const videoData = {
       "Recovery is possible with proper support",
       "Self-care plays an important role in treatment",
     ],
-    // In a real app, this would be a URL to a video file
-    videoUrl: null,
+    // Using a placeholder video URL for demo purposes
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
     thumbnail: null,
   },
   "8": {
@@ -67,24 +68,41 @@ const videoData = {
 export default function VideoScreen() {
   const router = useRouter();
   const { id } = useLocalSearchParams();
-  const [status, setStatus] = useState({});
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [position, setPosition] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const videoRef = useRef<Video>(null);
   
   const videoResource = videoData[id as keyof typeof videoData];
   
-  const handlePlayPress = () => {
-    // In a real app, this would load and play the actual video
-    Alert.alert(
-      "Video Simulation",
-      "This is a demo. In a real app, the video would start playing here.",
-      [
-        {
-          text: "OK",
-          onPress: () => {
-            console.log("Video would start playing");
-          },
-        },
-      ]
-    );
+  const playPauseVideo = async () => {
+    try {
+      if (videoRef.current) {
+        if (isPlaying) {
+          await videoRef.current.pauseAsync();
+          setIsPlaying(false);
+        } else {
+          await videoRef.current.playAsync();
+          setIsPlaying(true);
+        }
+      }
+    } catch (error) {
+      console.error('Error playing video:', error);
+      Alert.alert("Error", "Failed to play video.");
+    }
+  };
+
+  const onPlaybackStatusUpdate = (status: any) => {
+    if (status.isLoaded) {
+      setPosition(Math.floor(status.positionMillis / 1000));
+      setDuration(Math.floor(status.durationMillis / 1000));
+      setIsPlaying(status.isPlaying);
+      
+      if (status.didJustFinish) {
+        setIsPlaying(false);
+        setPosition(0);
+      }
+    }
   };
   
   if (!videoResource) {
@@ -115,19 +133,31 @@ export default function VideoScreen() {
       </View>
       
       <ScrollView style={styles.content}>
-        {/* Video Player Placeholder */}
+        {/* Video Player */}
         <View style={styles.videoContainer}>
-          <View style={styles.videoPlaceholder}>
-            <TouchableOpacity 
-              style={styles.playButton}
-              onPress={handlePlayPress}
-            >
-              <Ionicons name="play" size={40} color="#fff" />
-            </TouchableOpacity>
-            <View style={styles.videoDuration}>
-              <Text style={styles.durationText}>{videoResource.duration}</Text>
+          {videoResource.videoUrl ? (
+            <Video
+              ref={videoRef}
+              style={styles.video}
+              source={{ uri: videoResource.videoUrl }}
+              useNativeControls
+              resizeMode={ResizeMode.CONTAIN}
+              isLooping={false}
+              onPlaybackStatusUpdate={onPlaybackStatusUpdate}
+            />
+          ) : (
+            <View style={styles.videoPlaceholder}>
+              <TouchableOpacity 
+                style={styles.playButton}
+                onPress={playPauseVideo}
+              >
+                <Ionicons name={isPlaying ? "pause" : "play"} size={40} color="#fff" />
+              </TouchableOpacity>
+              <View style={styles.videoDuration}>
+                <Text style={styles.durationText}>{videoResource.duration}</Text>
+              </View>
             </View>
-          </View>
+          )}
         </View>
         
         <View style={styles.videoInfo}>
@@ -171,9 +201,9 @@ export default function VideoScreen() {
         </View>
         
         <View style={styles.actionButtons}>
-          <TouchableOpacity style={styles.primaryButton} onPress={handlePlayPress}>
-            <Ionicons name="play" size={20} color="#fff" />
-            <Text style={styles.primaryButtonText}>Watch Video</Text>
+          <TouchableOpacity style={styles.primaryButton} onPress={playPauseVideo}>
+            <Ionicons name={isPlaying ? "pause" : "play"} size={20} color="#fff" />
+            <Text style={styles.primaryButtonText}>{isPlaying ? "Pause Video" : "Watch Video"}</Text>
           </TouchableOpacity>
           
           <TouchableOpacity style={styles.secondaryButton}>
@@ -217,6 +247,10 @@ const styles = StyleSheet.create({
     width: "100%",
     height: (width * 9) / 16, // 16:9 aspect ratio
     backgroundColor: "#000",
+  },
+  video: {
+    width: "100%",
+    height: "100%",
   },
   videoPlaceholder: {
     flex: 1,

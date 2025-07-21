@@ -5,6 +5,9 @@ venv/
 env/
 *.pyc
 __pycache__/
+assets/audio
+assets/video
+
 
 # Rasa specific
 .rasa/
@@ -83,6 +86,8 @@ ehthumbs.db
 *.tmp
 *.temp
 
+app/(main)/resources/audio/1*
+app/(main)/resources/video/
 # Backend specific
 backend/.env
 backend/node_modules/

@@ -8,11 +8,13 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter, useLocalSearchParams } from "expo-router";
+import { Audio } from "expo-av";
 
 const audioData = {
   "5": {
     title: "Guided Meditation",
-    description: "5-minute mindfulness meditation to help you relax and center yourself",
+    description:
+      "5-minute mindfulness meditation to help you relax and center yourself",
     duration: "5:00",
     category: "Meditation",
     instructions: [
@@ -29,12 +31,13 @@ const audioData = {
       "Enhances self-awareness",
       "Better sleep quality",
     ],
-    // In a real app, this would be a URL to an audio file
-    audioUrl: null,
+    audioUrl:
+      "https://www.epidemicsound.com/sound-effects/tracks/1fb2ca6e-2906-4167-885f-c77a070e7e21/",
   },
   "6": {
     title: "Breathing Exercises",
-    description: "Simple breathing techniques to manage anxiety and promote relaxation",
+    description:
+      "Simple breathing techniques to manage anxiety and promote relaxation",
     duration: "3:30",
     category: "Breathing",
     instructions: [
@@ -62,60 +65,94 @@ export default function AudioScreen() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [position, setPosition] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [sound, setSound] = useState<Audio.Sound | null>(null);
   
   const audioResource = audioData[id as keyof typeof audioData];
   
   useEffect(() => {
+    // Configure audio mode
+    Audio.setAudioModeAsync({
+      allowsRecordingIOS: false,
+      staysActiveInBackground: false,
+      playsInSilentModeIOS: true,
+      shouldDuckAndroid: true,
+      playThroughEarpieceAndroid: false,
+    });
+
     // Cleanup function for audio resources
     return () => {
-      setIsPlaying(false);
-      setPosition(0);
+      if (sound) {
+        sound.unloadAsync();
+      }
     };
-  }, []);
+  }, [sound]);
 
   const playPauseAudio = async () => {
     try {
-      if (isPlaying) {
-        setIsPlaying(false);
+      if (sound) {
+        if (isPlaying) {
+          await sound.pauseAsync();
+          setIsPlaying(false);
+        } else {
+          await sound.playAsync();
+          setIsPlaying(true);
+        }
       } else {
-        // In a real app, you would load the actual audio file here
-        Alert.alert(
-          "Audio Simulation",
-          "This is a demo. In a real app, the audio would start playing here.",
-          [
-            {
-              text: "OK",
-              onPress: () => {
-                // Simulate audio playing
-                setIsPlaying(true);
-                setDuration(300); // 5 minutes in seconds
-                simulateAudioProgress();
-              },
-            },
-          ]
-        );
+        // Load and play the audio file
+        if (audioResource.audioUrl) {
+          const { sound: newSound } = await Audio.Sound.createAsync(
+            audioResource.audioUrl,
+            { shouldPlay: true },
+            onPlaybackStatusUpdate
+          );
+          setSound(newSound);
+          setIsPlaying(true);
+        } else {
+          Alert.alert("Error", "No audio file available for this resource.");
+        }
       }
     } catch (error) {
       console.error('Error playing audio:', error);
+      Alert.alert("Error", "Failed to play audio file.");
     }
   };
 
-  const simulateAudioProgress = () => {
-    const interval = setInterval(() => {
-      setPosition((prev) => {
-        if (prev >= 300) {
-          clearInterval(interval);
-          setIsPlaying(false);
-          return 0;
-        }
-        return prev + 1;
-      });
-    }, 1000);
+  const onPlaybackStatusUpdate = (status: any) => {
+    if (status.isLoaded) {
+      setPosition(Math.floor(status.positionMillis / 1000));
+      setDuration(Math.floor(status.durationMillis / 1000));
+      setIsPlaying(status.isPlaying);
+      
+      if (status.didJustFinish) {
+        setIsPlaying(false);
+        setPosition(0);
+      }
+    }
   };
 
   const stopAudio = async () => {
-    setIsPlaying(false);
-    setPosition(0);
+    try {
+      if (sound) {
+        await sound.stopAsync();
+        await sound.setPositionAsync(0);
+        setIsPlaying(false);
+        setPosition(0);
+      }
+    } catch (error) {
+      console.error('Error stopping audio:', error);
+    }
+  };
+
+  const seekAudio = async (seconds: number) => {
+    try {
+      if (sound && duration > 0) {
+        const newPosition = Math.max(0, Math.min(position + seconds, duration));
+        await sound.setPositionAsync(newPosition * 1000);
+        setPosition(newPosition);
+      }
+    } catch (error) {
+      console.error('Error seeking audio:', error);
+    }
   };
 
   const formatTime = (seconds: number) => {
@@ -180,6 +217,13 @@ export default function AudioScreen() {
           <View style={styles.controls}>
             <TouchableOpacity 
               style={styles.controlButton}
+              onPress={() => seekAudio(-10)}
+            >
+              <Ionicons name="play-back" size={24} color="#007AFF" />
+            </TouchableOpacity>
+            
+            <TouchableOpacity 
+              style={styles.controlButton}
               onPress={stopAudio}
               disabled={!isPlaying && position === 0}
             >
@@ -203,7 +247,7 @@ export default function AudioScreen() {
             
             <TouchableOpacity 
               style={styles.controlButton}
-              onPress={() => Alert.alert("Info", "Forward 30 seconds")}
+              onPress={() => seekAudio(10)}
             >
               <Ionicons name="play-forward" size={24} color="#007AFF" />
             </TouchableOpacity>
@@ -319,6 +363,12 @@ const styles = StyleSheet.create({
   controlButton: {
     padding: 12,
     marginHorizontal: 20,
+  },
+  seekText: {
+    fontSize: 10,
+    color: "#007AFF",
+    marginTop: 2,
+    fontWeight: "500",
   },
   playButton: {
     backgroundColor: "#007AFF",
