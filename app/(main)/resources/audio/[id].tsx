@@ -31,8 +31,7 @@ const audioData = {
       "Enhances self-awareness",
       "Better sleep quality",
     ],
-    audioUrl:
-      "https://www.epidemicsound.com/sound-effects/tracks/1fb2ca6e-2906-4167-885f-c77a070e7e21/",
+    audioUrl: "https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand3.wav",
   },
   "6": {
     title: "Breathing Exercises",
@@ -55,7 +54,179 @@ const audioData = {
       "Improves oxygen flow",
       "Calms the nervous system",
     ],
-    audioUrl: null,
+    audioUrl: "https://www2.cs.uic.edu/~i101/SoundFiles/BabyElephantWalk60.wav",
+  },
+  // Depression Audio Resources
+  "dep-audio-1": {
+    title: "Guided Meditation for Depression Relief",
+    description: "15-minute guided meditation to ease depressive symptoms",
+    duration: "15:00",
+    category: "Depression Support",
+    instructions: [
+      "Find a quiet, comfortable space",
+      "Sit or lie down in a relaxed position",
+      "Close your eyes and breathe naturally",
+      "Follow the gentle guidance",
+      "Be patient and kind with yourself",
+    ],
+    benefits: [
+      "Reduces depressive symptoms",
+      "Promotes emotional healing",
+      "Increases self-compassion",
+      "Improves mood regulation",
+      "Enhances overall well-being",
+    ],
+    audioUrl: "https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand3.wav",
+  },
+  "dep-audio-2": {
+    title: "Positive Affirmations for Depression",
+    description: "Daily affirmations to combat negative thought patterns",
+    duration: "10:30",
+    category: "Depression Support",
+    instructions: [
+      "Listen in a quiet environment",
+      "Repeat the affirmations aloud or silently",
+      "Focus on the meaning of each statement",
+      "Practice daily for best results",
+      "Believe in your capacity for healing",
+    ],
+    benefits: [
+      "Challenges negative self-talk",
+      "Builds self-esteem",
+      "Promotes positive thinking",
+      "Strengthens resilience",
+      "Supports recovery process",
+    ],
+    audioUrl: "https://www2.cs.uic.edu/~i101/SoundFiles/StarWars3.wav",
+  },
+  // Anxiety Audio Resources
+  "anx-audio-1": {
+    title: "Panic Attack Relief Meditation",
+    description: "Immediate calming techniques for panic attacks",
+    duration: "8:30",
+    category: "Anxiety Relief",
+    instructions: [
+      "Use immediately when feeling panic",
+      "Focus on your breathing",
+      "Follow the calming voice",
+      "Ground yourself in the present moment",
+      "Remember that this feeling will pass",
+    ],
+    benefits: [
+      "Provides immediate relief",
+      "Reduces panic symptoms",
+      "Teaches coping strategies",
+      "Promotes calm and safety",
+      "Builds confidence in managing anxiety",
+    ],
+    audioUrl: "https://www2.cs.uic.edu/~i101/SoundFiles/PinkPanther30.wav",
+  },
+  "anx-audio-2": {
+    title: "4-7-8 Breathing for Anxiety",
+    description: "Proven breathing technique to reduce anxiety quickly",
+    duration: "5:45",
+    category: "Anxiety Relief",
+    instructions: [
+      "Sit comfortably with back straight",
+      "Exhale completely through your mouth",
+      "Inhale through nose for 4 counts",
+      "Hold breath for 7 counts",
+      "Exhale through mouth for 8 counts",
+    ],
+    benefits: [
+      "Activates relaxation response",
+      "Reduces anxiety quickly",
+      "Lowers heart rate",
+      "Calms nervous system",
+      "Easy to use anywhere",
+    ],
+    audioUrl: "https://www2.cs.uic.edu/~i101/SoundFiles/ImperialMarch60.wav",
+  },
+  // Sleep Audio Resources
+  "sleep-audio-1": {
+    title: "Deep Sleep Meditation",
+    description: "Guided meditation to help you fall asleep naturally",
+    duration: "45:00",
+    category: "Sleep Support",
+    instructions: [
+      "Use in bed when ready to sleep",
+      "Lie down comfortably",
+      "Close your eyes",
+      "Follow the gentle guidance",
+      "Allow yourself to drift off naturally",
+    ],
+    benefits: [
+      "Promotes natural sleep",
+      "Reduces sleep anxiety",
+      "Improves sleep quality",
+      "Calms racing thoughts",
+      "Establishes healthy sleep routine",
+    ],
+    audioUrl: "https://www2.cs.uic.edu/~i101/SoundFiles/tada.wav",
+  },
+  "sleep-audio-2": {
+    title: "Rain Sounds for Sleep",
+    description: "Gentle rain sounds to promote restful sleep",
+    duration: "60:00",
+    category: "Sleep Support",
+    instructions: [
+      "Play at comfortable volume",
+      "Use throughout the night",
+      "Combine with other sleep hygiene practices",
+      "Create a consistent bedtime routine",
+      "Ensure room is dark and cool",
+    ],
+    benefits: [
+      "Masks disruptive sounds",
+      "Creates calming environment",
+      "Promotes deeper sleep",
+      "Reduces sleep interruptions",
+      "Natural and soothing",
+    ],
+    audioUrl: "https://www2.cs.uic.edu/~i101/SoundFiles/gettysburg10.wav",
+  },
+  // Mental Health Audio Resources
+  "mh-audio-1": {
+    title: "Daily Mindfulness Practice",
+    description: "10-minute daily mindfulness meditation for mental wellness",
+    duration: "10:00",
+    category: "Mental Wellness",
+    instructions: [
+      "Practice at the same time daily",
+      "Find a quiet space",
+      "Sit comfortably",
+      "Focus on present moment awareness",
+      "Be gentle with wandering thoughts",
+    ],
+    benefits: [
+      "Builds mindfulness skills",
+      "Reduces overall stress",
+      "Improves emotional regulation",
+      "Enhances self-awareness",
+      "Supports mental clarity",
+    ],
+    audioUrl: "https://www2.cs.uic.edu/~i101/SoundFiles/gettysburg.wav",
+  },
+  "mh-audio-2": {
+    title: "Stress Relief Meditation",
+    description: "Guided meditation to reduce stress and tension",
+    duration: "18:30",
+    category: "Mental Wellness",
+    instructions: [
+      "Use when feeling overwhelmed",
+      "Find a comfortable position",
+      "Focus on releasing tension",
+      "Follow the guided relaxation",
+      "Take time to integrate the experience",
+    ],
+    benefits: [
+      "Reduces stress hormones",
+      "Releases physical tension",
+      "Promotes mental clarity",
+      "Improves coping abilities",
+      "Restores inner balance",
+    ],
+    audioUrl: "https://www2.cs.uic.edu/~i101/SoundFiles/LaserShot.wav",
   },
 };
 
@@ -100,8 +271,13 @@ export default function AudioScreen() {
       } else {
         // Load and play the audio file
         if (audioResource.audioUrl) {
+          // Handle both local and remote URLs
+          const source = typeof audioResource.audioUrl === 'string'
+            ? { uri: audioResource.audioUrl }
+            : audioResource.audioUrl;
+            
           const { sound: newSound } = await Audio.Sound.createAsync(
-            audioResource.audioUrl,
+            source,
             { shouldPlay: true },
             onPlaybackStatusUpdate
           );

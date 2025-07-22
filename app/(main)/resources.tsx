@@ -58,20 +58,56 @@ const resourceCategories = [
   },
   {
     id: "education",
-    title: "Educational Content",
+    title: "Educational Support",
     icon: "book-outline",
     resources: [
       {
-        id: "3",
-        title: "Understanding Anxiety",
-        description: "Learn about anxiety symptoms and management",
-        type: "article",
+        id: "depression-videos",
+        title: "Depression Education Videos",
+        description: "Comprehensive video resources about depression",
+        type: "video-category",
       },
       {
-        id: "4",
-        title: "Stress Management Guide",
-        description: "Comprehensive guide to managing stress",
-        type: "article",
+        id: "anxiety-videos",
+        title: "Anxiety Education Videos",
+        description: "Video resources for understanding and managing anxiety",
+        type: "video-category",
+      },
+      {
+        id: "sleep-videos",
+        title: "Sleep & Insomnia Videos",
+        description: "Educational videos about sleep disorders and solutions",
+        type: "video-category",
+      },
+      {
+        id: "mental-health-videos",
+        title: "General Mental Health Videos",
+        description: "Comprehensive mental health education videos",
+        type: "video-category",
+      },
+      {
+        id: "depression-audio",
+        title: "Depression Audio Resources",
+        description: "Guided audio content for depression support",
+        type: "audio-category",
+      },
+      {
+        id: "anxiety-audio",
+        title: "Anxiety Audio Resources",
+        description: "Calming audio content for anxiety management",
+        type: "audio-category",
+      },
+      {
+        id: "sleep-audio",
+        title: "Sleep Audio Resources",
+        description: "Relaxing audio content for better sleep",
+        type: "audio-category",
+      },
+      {
+        id: "mental-health-audio",
+        title: "General Mental Health Audio",
+        description: "Comprehensive audio resources for mental wellness",
+        type: "audio-category",
       },
     ],
   },
@@ -189,6 +225,12 @@ export default function ResourcesScreen() {
         break;
       case "link":
         router.push(`/resources/link/${resource.id}`);
+        break;
+      case "video-category":
+        router.push(`/(main)/resources/video-category/${resource.id}` as any);
+        break;
+      case "audio-category":
+        router.push(`/(main)/resources/audio-category/${resource.id}` as any);
         break;
     }
   };
