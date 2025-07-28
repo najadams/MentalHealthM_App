@@ -3,7 +3,7 @@ import { auth } from "../middleware/auth.middleware";
 import { Chat } from "../models/chat.model";
 import { AuthRequest } from "../types";
 import { NLPService } from "../services/nlp.service";
-import { RasaService } from "../services/rasa.service";
+import { AIService } from "../services/ai.service";
 
 const router = express.Router();
 
@@ -161,27 +161,29 @@ router.post("/:sessionId/messages", auth, async (req: AuthRequest, res: Response
     chat.messages.push(userMessage);
     chat.lastMessage = userMessage;
 
-    // Process message with Rasa
-    const rasaResponse = await RasaService.processMessage(
-      req.user._id.toString(),
-      content
+    // Get conversation history for context
+    const conversationHistory = AIService.formatConversationHistory(
+      chat.messages.slice(-10) // Last 10 messages for context
     );
 
-    // Update user message with sentiment and categories from Rasa
-    userMessage.sentiment =
-      (rasaResponse.sentiment as "positive" | "negative" | "neutral") ||
-      "neutral";
-    if (rasaResponse.categories) {
-      userMessage.categories = rasaResponse.categories;
-    }
+    // Process message with AI service (OpenAI primary, Rasa fallback)
+    const aiResponse = await AIService.processMessage(
+      req.user._id.toString(),
+      content,
+      conversationHistory
+    );
+
+    // Update user message with sentiment and categories from AI
+    userMessage.sentiment = aiResponse.sentiment;
+    userMessage.categories = aiResponse.categories;
 
     // Update mental health topics for the chat
     if (!chat.mentalHealthTopics) {
       chat.mentalHealthTopics = [];
     }
 
-    if (rasaResponse.categories) {
-      rasaResponse.categories.forEach((category) => {
+    if (aiResponse.categories) {
+      aiResponse.categories.forEach((category: string) => {
         if (!chat.mentalHealthTopics?.includes(category)) {
           chat.mentalHealthTopics?.push(category);
         }
@@ -189,26 +191,25 @@ router.post("/:sessionId/messages", auth, async (req: AuthRequest, res: Response
     }
 
     // Create AI response message
-    const aiResponse = {
+    const aiResponseMessage = {
       sender: "ai-assistant",
-      content: rasaResponse.content,
+      content: aiResponse.content,
       timestamp: new Date(),
       read: true,
-      sentiment:
-        (rasaResponse.sentiment as "positive" | "negative" | "neutral") ||
-        "neutral",
-      categories: rasaResponse.categories,
+      sentiment: aiResponse.sentiment,
+      categories: aiResponse.categories,
     };
 
-    chat.messages.push(aiResponse);
-    chat.lastMessage = aiResponse;
+    chat.messages.push(aiResponseMessage);
+    chat.lastMessage = aiResponseMessage;
     
     await chat.save();
 
     res.json({
       success: true,
       message: userMessage,
-      aiResponse: aiResponse,
+      aiResponse: aiResponseMessage,
+      provider: aiResponse.provider, // Include which AI service was used
     });
   } catch (error: any) {
     res.status(500).json({

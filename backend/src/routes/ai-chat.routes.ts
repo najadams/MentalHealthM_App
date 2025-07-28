@@ -2,7 +2,7 @@ import express, { Response } from "express";
 import { auth } from "../middleware/auth.middleware";
 import { Chat } from "../models/chat.model";
 import { AuthRequest } from "../types";
-import { RasaService } from "../services/rasa.service";
+import { AIService } from "../services/ai.service";
 
 const router = express.Router();
 
@@ -115,28 +115,29 @@ router.post("/message", auth, async (req: AuthRequest, res: Response) => {
     aiChat.messages.push(userMessage);
     aiChat.lastMessage = userMessage;
 
-    // Process message with Rasa
-    const rasaResponse = await RasaService.processMessage(
-      req.user._id.toString(),
-      content
+    // Get conversation history for context
+    const conversationHistory = AIService.formatConversationHistory(
+      aiChat.messages.slice(-10) // Last 10 messages for context
     );
 
-    // Update user message with sentiment and categories from Rasa
-    // Add type assertion or default value to ensure it's one of the allowed values
-    userMessage.sentiment =
-      (rasaResponse.sentiment as "positive" | "negative" | "neutral") ||
-      "neutral";
-    if (rasaResponse.categories) {
-      userMessage.categories = rasaResponse.categories;
-    }
+    // Process message with AI service (OpenAI primary, Rasa fallback)
+    const aiResponse = await AIService.processMessage(
+      req.user._id.toString(),
+      content,
+      conversationHistory
+    );
+
+    // Update user message with sentiment and categories from AI
+    userMessage.sentiment = aiResponse.sentiment;
+    userMessage.categories = aiResponse.categories;
 
     // Update mental health topics for the chat
     if (!aiChat.mentalHealthTopics) {
       aiChat.mentalHealthTopics = [];
     }
 
-    if (rasaResponse.categories) {
-      rasaResponse.categories.forEach((category) => {
+    if (aiResponse.categories) {
+      aiResponse.categories.forEach((category: string) => {
         if (!aiChat.mentalHealthTopics?.includes(category)) {
           aiChat.mentalHealthTopics?.push(category);
         }
@@ -144,27 +145,26 @@ router.post("/message", auth, async (req: AuthRequest, res: Response) => {
     }
 
     // Create AI response message
-    const aiResponse = {
+    const aiResponseMessage = {
       sender: "ai-assistant",
-      content: rasaResponse.content,
+      content: aiResponse.content,
       timestamp: new Date(),
       read: true,
-      sentiment:
-        (rasaResponse.sentiment as "positive" | "negative" | "neutral") ||
-        "neutral",
-      categories: rasaResponse.categories,
+      sentiment: aiResponse.sentiment,
+      categories: aiResponse.categories,
     };
 
-    aiChat.messages.push(aiResponse);
-    aiChat.lastMessage = aiResponse;
+    aiChat.messages.push(aiResponseMessage);
+    aiChat.lastMessage = aiResponseMessage;
 
     await aiChat.save();
 
     res.json({
       success: true,
       userMessage,
-      aiResponse,
+      aiResponse: aiResponseMessage,
       chat: aiChat,
+      provider: aiResponse.provider, // Include which AI service was used
     });
   } catch (error: any) {
     res.status(500).json({
@@ -188,13 +188,34 @@ router.post("/message", async (req, res) => {
         .json({ error: "User ID and message are required" });
     }
 
-    // Process the message with Rasa
-    const response = await RasaService.processMessage(userId, message);
+    // Process the message with AI service
+    const response = await AIService.processMessage(userId, message);
 
     return res.json(response);
   } catch (error) {
     console.error("Error processing chat message:", error);
     return res.status(500).json({ error: "Failed to process message" });
+  }
+});
+
+// Health check route for AI services
+router.get("/health", async (req, res) => {
+  try {
+    const healthStatus = await AIService.healthCheck();
+    const serviceStatus = AIService.getServiceStatus();
+    
+    res.json({
+      success: true,
+      health: healthStatus,
+      services: serviceStatus,
+      timestamp: new Date().toISOString()
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      error: error.message || "Health check failed",
+      timestamp: new Date().toISOString()
+    });
   }
 });
 
