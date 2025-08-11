@@ -86,8 +86,6 @@ ehthumbs.db
 *.temp
 .vercel
 
-app/(main)/resources/audio/1*
-app/(main)/resources/video/
 # Backend specific
 backend/.env
 backend/node_modules/
