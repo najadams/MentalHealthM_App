@@ -17,7 +17,6 @@ backend/rasa/cache/
 backend/rasa/.rasa/
 firebase*
 folder)structure
-chat
 
 # Node modules
 node_modules/
