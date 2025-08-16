@@ -101,8 +101,16 @@ export class OpenAIService {
       
       // Provide specific error messages for common issues
       if (error.response?.status === 401) {
+        const errorData = error.response?.data;
+        if (errorData?.error?.type === 'insufficient_quota' || errorData?.error?.code === 'insufficient_quota') {
+          throw new Error('OpenAI quota exceeded - please check billing');
+        }
         throw new Error('Invalid OpenAI API key');
       } else if (error.response?.status === 429) {
+        const errorData = error.response?.data;
+        if (errorData?.error?.type === 'insufficient_quota' || errorData?.error?.code === 'insufficient_quota') {
+          throw new Error('OpenAI quota exceeded - please check billing');
+        }
         throw new Error('OpenAI rate limit exceeded');
       } else if (error.response?.status === 503) {
         throw new Error('OpenAI service temporarily unavailable');

@@ -46,12 +46,8 @@ export class RasaService {
       };
     } catch (error) {
       console.error("Error communicating with Rasa:", error);
-      return {
-        text: [
-          "I'm having trouble processing your message right now. Please try again later.",
-        ],
-        links: []
-      };
+      // Throw error to allow AIService to handle fallback properly
+      throw new Error(`Rasa server unavailable: ${error}`);
     }
   }
 

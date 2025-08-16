@@ -175,10 +175,10 @@ router.post("/message", auth, async (req: AuthRequest, res: Response) => {
 });
 
 /**
- * Route to handle chat messages to Rasa
- * POST /api/ai-chat/message
+ * Route to handle chat messages without authentication (for testing)
+ * POST /api/ai-chat/test-message
  */
-router.post("/message", async (req, res) => {
+router.post("/test-message", async (req, res) => {
   try {
     const { userId, message } = req.body;
 
@@ -191,6 +191,7 @@ router.post("/message", async (req, res) => {
     // Process the message with AI service
     const response = await AIService.processMessage(userId, message);
 
+    console.log(response)
     return res.json(response);
   } catch (error) {
     console.error("Error processing chat message:", error);
